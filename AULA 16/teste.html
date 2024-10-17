@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>teste</title>
+  </head>
+  <body>
+    <p>localStorage</p>
+    <h1 id="resultado"></h1>
+
+    <p>SessionStorage</p>
+    <h2 id="resultadoSessionStorage"></h2>
+
+    <script>
+
+      const resultado = document.getElementById("resultado");
+      const count = localStorage.getItem("count");
+      resultado.innerText = count;
+
+
+      const countSessionStorage = sessionStorage.getItem("count");
+      const resultadoSessionStorage = document.getElementById("resultadoSessionStorage");
+
+      resultadoSessionStorage.innerText = countSessionStorage;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      .d-block {
+        display: block;
+      }
+
+      .d-none {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <main id="main">
+      <h1 id="loading">...carregando</h1>
+    </main>
+
+    <script>
+      const produtos = [
+        { id: 1, name: "Teclado", valor: "R$ 30.00" },
+        { id: 2, name: "PC", valor: "R$ 1000.00" },
+        { id: 3, name: "Mouse", valor: "R$ 30.00" },
+        { id: 4, name: "Monitor", valor: "R$ 800.00" },
+        { id: 5, name: "Cadeira Gamer", valor: "R$ 700.00" },
+      ];
+
+      const listaProdutos = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve(produtos);
+          // reject("Ops, não foi possivel carregar a informação");
+        }, 3000);
+      });
+
+      function onMount() {
+        const loading = document.getElementById("loading");
+
+        loading.classList = "d-block";
+
+        const main = document.getElementById("main");
+        listaProdutos
+          .then((produtos) => {
+            produtos.forEach((produto) => {
+              const div = document.createElement("div");
+              div.innerHTML = `<h1>${produto.name} - ${produto.valor}<h1>`;
+              main.append(div);
+            });
+          })
+          .catch((error) => {
+            const h1 = document.createElement("h1");
+            h1.innerText = error;
+            main.append(error);
+          })
+          .finally(() => {
+            loading.classList = "d-none";
+          });
+      }
+
+      onMount();
+    </script>
+  </body>
+</html>
